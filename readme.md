@@ -55,6 +55,7 @@
 
 ### Установка
 1. Склонируйте репозиторий:
+
    ```bash
    git clone https://github.com/galkin-v/blogger_bot.git
 ### Использование
