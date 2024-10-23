@@ -59,8 +59,10 @@
    git clone https://github.com/galkin-v/blogger_bot.git
 ### Использование
 1. Создайте файл `.env` и добавьте в него ваш API ключ:
+
    ```env
    API_KEY=ваш_ключ
 2. Запустите бота:
+
    ```python3
    python3 run.py
