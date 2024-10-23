@@ -22,7 +22,7 @@ class NewsBlogAssistant:
         self.save_dir = save_dir
         self.title_history_file = os.path.join(self.save_dir, 'titles.txt')
         self.title_history = self.load_title_history()
-        os.makedirs(self.save_dir, exist_ok=True)  # Создаем директорию, если она не существует
+        os.makedirs(self.save_dir, exist_ok=True)
 
     def load_title_history(self):
         """Загружаем историю заголовков из файла."""
@@ -155,28 +155,23 @@ class NewsBlogAssistant:
 
         post = chat_completion.choices[0].message.content
 
-        # Сохраняем новый заголовок
         self.save_title(title)
 
-        # Добавляем номер поста в имя файла
         post_number = len(self.title_history)
         post_file = os.path.join(self.save_dir, f'post_{post_number}.md')
 
-        # Сохраняем пост
         with open(post_file, 'w+') as file:
             file.write(post)
         
-        # Генерация изображения
         if self.add_image:
             post_cover_url = self.generate_image(post)
             print(f"Cover image URL: {post_cover_url}")
 
             try:
                 response = requests.get(post_cover_url)
-                response.raise_for_status()  # Проверка на ошибки запроса
+                response.raise_for_status()
                 img = Image.open(BytesIO(response.content))
 
-                # Сохранение изображения
                 image_file = os.path.join(self.save_dir, f'post_{post_number}_cover.png')
                 img.save(image_file)
 
@@ -185,7 +180,6 @@ class NewsBlogAssistant:
             except Exception as e:
                 print(f"Failed to save the image: {e}")
         
-        # Преобразование markdown в docx
         try:
             print(f"Converting post to docx: {post_file}...")
             project = Markdown2docx(post_file[:-3], self.save_dir)
