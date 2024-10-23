@@ -63,7 +63,8 @@
 
    ```env
    API_KEY=ваш_ключ
-2. Запустите бота:
+2. Установите зависимости из requirements.txt
+3. Запустите бота:
 
    ```python3
    python3 run.py
